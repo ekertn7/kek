@@ -46,10 +46,14 @@ function Edge(edge_name, node_left, node_right, edge_attributes, arrow_style, li
 };
 
 var e1 = new Edge('e1', n1, n2, {'weight': 150}, 'Default', 'Default', '#555555');
+var e2 = new Edge('e1', n1, n3, {'weight': 640}, 'Default', 'Default', '#555555');
 e1.draw();
-var n1 = new Node('n1', {'label': 'node1'}, 'Circle', '#00FF00', '#0000FF', 40, 'Group_1', 160, 70);
-var n2 = new Node('n2', {'label': 'node2'}, 'Circle', '#00FF00', '#FF0000', 40, 'Group_2', 250, 150);
+e2.draw();
+var n1 = new Node('n1', {'label': 'node1'}, 'Circle', '#555555', '#0000FF', 40, 'Group_1', 160, 70);
+var n2 = new Node('n2', {'label': 'node2'}, 'Circle', '#555555', '#FF0000', 40, 'Group_2', 250, 150);
+var n3 = new Node('n3', {'label': 'node3'}, 'Circle', '#555555', '#FF0000', 40, 'Group_2', 550, 250);
 n1.draw();
 n2.draw();
+n3.draw();
 
 
