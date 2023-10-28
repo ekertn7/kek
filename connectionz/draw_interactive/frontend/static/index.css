@@ -1,0 +1,12 @@
+body {
+    background-color: blue;
+}
+
+.button {
+    display: block;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
