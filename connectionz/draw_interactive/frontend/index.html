@@ -6,8 +6,25 @@
 </head>
 <body>
     <div class="canvasParent" style="display: block; width: 100%; height: {window_height}px; padding: 0; margin: 0;">
-        <canvas height="{window_height}" id="visualisation"></canvas>
+        <canvas height="{window_height}" id="visualisation" style="position: relative; z-index: 0;"></canvas>
+        <table class="legend" style="position: absolute; z-index: 3; bottom: 0; right: 0;">
+            <tbody>
+                <tr>
+                    <td>Название вершины</td>
+                    <td id="legend_name">...</td>
+                </tr>
+                <tr>
+                    <td>Атрибуты вершины</td>
+                    <td id="legend_attribute">...</td>
+                </tr>
+                <tr>
+                    <td>Группа вершины</td>
+                    <td id="legend_group">...</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+    
     <!-- <script type="text/javascript">var graph = {graph_data}</script> -->
     <script type="text/javascript">{code}</script>
 </body>
