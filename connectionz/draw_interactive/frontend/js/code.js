@@ -20,55 +20,113 @@ var graph = {
                 },
                 {
                     "group_name": "Group_2",
+                    "group_color": "#00FF00"
+                },
+                {
+                    "group_name": "Group_3",
                     "group_color": "#FF0000"
-                }
+                },
             ]
         }, 
     "nodes":
         [
             {
                 "node_name": "n1",
-                "node_attributes": {"label": "Anatoliy"},
+                "node_attributes": {"label": "Андрей"},
                 "shape": "Circle",
-                "color": "#555555",
-                "group": "Group_1",
+                "color": "#424242",
+                "group": "Group_2",
                 "position": {"x": 160, "y": 70},
                 "size": 50
             },
             {
                 "node_name": "n2",
-                "node_attributes": {"label": "Boris"},
+                "node_attributes": {"label": "Борис"},
                 "shape": "Circle",
-                "color": "#555555",
+                "color": "#797979",
                 "group": "Group_2",
                 "position": {"x": 250, "y": 150},
                 "size": 40
             },
             {
                 "node_name": "n3",
-                "node_attributes": {"label": "Cristina"},
+                "node_attributes": {"label": "Виктор"},
                 "shape": "Circle",
-                "color": "#555555",
+                "color": "#AAAAAA",
                 "group": "Group_2",
                 "position": {"x": 320, "y": 245},
                 "size": 30
             },
             {
                 "node_name": "n4",
-                "node_attributes": {"label": "Daniel"},
+                "node_attributes": {"label": "Глеб"},
                 "shape": "Circle",
-                "color": "#555555",
-                "group": "Group_1",
-                "position": {"x": 210, "y": 260},
+                "color": "#AAAAAA",
+                "group": "Group_2",
+                "position": {"x": 410, "y": 120},
                 "size": 30
             },
             {
                 "node_name": "n5",
-                "node_attributes": {"label": "Eugeniy"},
+                "node_attributes": {"label": "Дмитрий"},
                 "shape": "Circle",
-                "color": "#555555",
+                "color": "#AAAAAA",
                 "group": "Group_1",
-                "position": {"x": 10, "y": 60},
+                "position": {"x": 730, "y": 320},
+                "size": 30
+            },
+            {
+                "node_name": "n6",
+                "node_attributes": {"label": "Евгений"},
+                "shape": "Circle",
+                "color": "#AAAAAA",
+                "group": "Group_3",
+                "position": {"x": 700, "y": 70},
+                "size": 30
+            },
+            {
+                "node_name": "n7",
+                "node_attributes": {"label": "Илья"},
+                "shape": "Circle",
+                "color": "#AAAAAA",
+                "group": "Group_3",
+                "position": {"x": 800, "y": 140},
+                "size": 30
+            },
+            {
+                "node_name": "n8",
+                "node_attributes": {"label": "Константин"},
+                "shape": "Circle",
+                "color": "#AAAAAA",
+                "group": "Group_1",
+                "position": {"x": 280, "y": 500},
+                "size": 30
+            },
+            {
+                "node_name": "n9",
+                "node_attributes": {"label": "Лев"},
+                "shape": "Circle",
+                "color": "#AAAAAA",
+                "group": "Group_1",
+                "position": {"x": 330, "y": 380},
+                "size": 30
+            },
+            {
+                "node_name": "n10",
+                "node_attributes": {"label": "Михаил"},
+                "shape": "Circle",
+                "color": "#797979",
+                "group": "Group_1",
+                "position": {"x": 505, "y": 430},
+                "size": 40
+            },
+            {
+                "node_name": "n11",
+                "node_attributes": {"label": "Никита"},
+                "shape": "Circle",
+                "color": "#AAAAAA",
+                "group": "Group_2",
+                "position": {"x": 40, "y": 120},
                 "size": 30
             },
         ],
@@ -85,8 +143,8 @@ var graph = {
             },
             {
                 "edge_name": "e2",
-                "node_left": "n2",
-                "node_right": "n3",
+                "node_left": "n6",
+                "node_right": "n7",
                 "edge_attributes": {"weight": 150},
                 "arrow_style": "Default",
                 "line_style": "Default",
@@ -103,8 +161,44 @@ var graph = {
             },
             {
                 "edge_name": "e4",
-                "node_left": "n1",
+                "node_left": "n10",
                 "node_right": "n5",
+                "edge_attributes": {"weight": 150},
+                "arrow_style": "Default",
+                "line_style": "Default",
+                "color": "#000000"
+            },
+            {
+                "edge_name": "e5",
+                "node_left": "n2",
+                "node_right": "n3",
+                "edge_attributes": {"weight": 150},
+                "arrow_style": "Default",
+                "line_style": "Default",
+                "color": "#000000"
+            },
+            {
+                "edge_name": "e6",
+                "node_left": "n1",
+                "node_right": "n11",
+                "edge_attributes": {"weight": 150},
+                "arrow_style": "Default",
+                "line_style": "Default",
+                "color": "#000000"
+            },
+            {
+                "edge_name": "e7",
+                "node_left": "n9",
+                "node_right": "n10",
+                "edge_attributes": {"weight": 150},
+                "arrow_style": "Default",
+                "line_style": "Default",
+                "color": "#000000"
+            },
+            {
+                "edge_name": "e8",
+                "node_left": "n8",
+                "node_right": "n10",
                 "edge_attributes": {"weight": 150},
                 "arrow_style": "Default",
                 "line_style": "Default",
@@ -153,14 +247,14 @@ function draw(node_for_draw_border) {
         ctx.stroke();
 
         ctx.fillStyle = "#000000";
-        ctx.font = "16px Arial";
+        // ctx.font = "16px Arial";
         ctx.textAlign = "center";
         ctx.textBaseline = "top";
         ctx.fillText((node["node_attributes"]["label"]) ? node["node_attributes"]["label"] : node["node_name"], node["position"]["x"], node["position"]["y"] + node["size"]/2 + 8);
     };
     if (node_for_draw_border) {
         ctx.beginPath();
-        ctx.roundRect(node_for_draw_border["position"]["x"] - node_for_draw_border["size"]/2 - 5, node_for_draw_border["position"]["y"] - node_for_draw_border["size"]/2 - 5, node_for_draw_border["size"] + 10, node_for_draw_border["size"] + 10, 1000);
+        ctx.roundRect(node_for_draw_border["position"]["x"] - node_for_draw_border["size"]/2 - 5, node_for_draw_border["position"]["y"] - node_for_draw_border["size"]/2 - 5, node_for_draw_border["size"] + 10, node_for_draw_border["size"] + 10, 4);
         ctx.lineWidth = 2;
         ctx.strokeStyle = "#EB801E";
         ctx.stroke();
