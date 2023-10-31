@@ -1,6 +1,8 @@
 """Exception class when incorrect input type."""
 from typing import Optional, Any
 
+__all__ = ['WrongInputTypeException']
+
 
 class WrongInputTypeException(Exception):
     """Exception class when incorrect input type."""

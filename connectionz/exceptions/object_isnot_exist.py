@@ -1,6 +1,8 @@
 """Exception class when an object that is not exists is called."""
 from typing import Optional
 
+__all__ = ['ObjectIsNotExistException']
+
 
 class ObjectIsNotExistException(Exception):
     """Exception class when an object that is not exists is called."""

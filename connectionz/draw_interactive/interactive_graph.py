@@ -11,6 +11,8 @@ class IG_Info:
     directed: bool
     layout: str
     groups: list[dict[str, str]]
+    nodes_label: bool
+    nodes_label_align: str
 
     def to_dict(self) -> dict:
         """TODO"""

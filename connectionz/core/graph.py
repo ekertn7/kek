@@ -2,8 +2,9 @@
 from uuid import uuid4
 from typing import Union, Mapping, Iterable, Any
 from abc import ABC, abstractmethod
-from connectionz.core import Node, Edge
-from connectionz.exceptions import WrongInputTypeException
+from connectionz import Node, Edge
+from connectionz.exceptions.wrong_input_type import WrongInputTypeException
+from connectionz.exceptions.object_already_exist import ObjectAlreadyExistException
 
 __all__ = ['Graph']
 
@@ -77,3 +78,60 @@ class Graph(ABC):
             return self.nodes == other.nodes and self.edges == other.edges
         else:
             raise WrongInputTypeException(other, Graph)
+
+    def add_node(self, node: Node, replace_existing: bool = False, **kwargs) \
+        -> None:
+        """
+        Add a new node to a graph.
+
+        Arguments:
+            node:             Unique node name.
+            replace_existing: True = existing node will be replaced by new.
+                              False = existing node will NOT be replaced by new.
+            kwargs:           Node attributes.
+
+        Examples:
+            G.add_node('A')
+            G.add_node('B', name='Nikita', age=25)
+        """
+        if not isinstance(node, Node):
+            raise WrongInputTypeException(node, Node)
+        if replace_existing:
+            self.nodes[node] = kwargs
+        else:
+            if node not in self.nodes:
+                self.nodes[node] = kwargs
+            else:
+                raise ObjectAlreadyExistException(object_name='node')
+
+    def add_edge(self, node_l: Node, node_r: Node,
+                 replace_existing: bool = False, **kwargs) -> None:
+        """
+        Add a new directed edge to a graph.
+
+        Arguments:
+            node_l:           Node that affects the second node.
+            node_r:           Node that affected by the first node.
+            replace_existing: True = existing edge will be replaced by new.
+                              False = existing edge will NOT be replaced by new.
+            kwargs:           Edge attributes.
+
+        Examples:
+            G.add_edge('A', 'B')
+            G.add_edge('C', 'D', weight=1.23, label='sale')
+        """
+        if not isinstance(node_l, Node):
+            raise WrongInputTypeException(node_l, Node)
+        if not isinstance(node_r, Node):
+            raise WrongInputTypeException(node_r, Node)
+        if replace_existing:
+            self.edges[Edge(node_l, node_r)] = kwargs
+        else:
+            if (node_l, node_r) not in self.edges:
+                self.edges[Edge(node_l, node_r)] = kwargs
+            else:
+                raise ObjectAlreadyExistException(object_name='edge')
+
+    @abstractmethod
+    def get_neighbors(self, selected_node: Node) -> list[Node]:
+        """Get nodes connected to selected node."""

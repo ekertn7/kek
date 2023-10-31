@@ -1,6 +1,6 @@
 """Base class to represent connection between two nodes."""
 from typing import NamedTuple, Mapping, Any
-from connectionz.core.node import Node
+from connectionz import Node
 
 __all__ = ['Edge']
 

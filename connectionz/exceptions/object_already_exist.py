@@ -1,6 +1,8 @@
 """Exception class when an object that already exists is called."""
 from typing import Optional
 
+__all__ = ['ObjectAlreadyExistException']
+
 
 class ObjectAlreadyExistException(Exception):
     """Exception class when an object that already exists is called."""
