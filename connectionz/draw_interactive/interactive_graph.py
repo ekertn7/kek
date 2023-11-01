@@ -13,6 +13,7 @@ class IG_Info:
     groups: list[dict[str, str]]
     nodes_label: bool
     nodes_label_align: str
+    show_nodes_without_groups: bool
 
     def to_dict(self) -> dict:
         """TODO"""

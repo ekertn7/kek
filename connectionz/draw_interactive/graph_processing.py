@@ -1,8 +1,10 @@
 """TODO"""
 import os
 import json
+import sys
 import uuid
 import random
+import warnings
 from typing import Callable
 from connectionz import DirectedGraph, UndirectedGraph, Node
 from connectionz.exceptions.wrong_input_type import WrongInputTypeException
@@ -26,7 +28,10 @@ def _make_groups(graph: DirectedGraph | UndirectedGraph, algorithm) \
         -> dict[Node, str]:
     """TODO"""
     groups = {}
-    subgraphs = algorithm(graph)
+    with warnings.catch_warnings():
+        warnings.simplefilter('ignore')
+        warnings.warn('deprecated', DeprecationWarning)
+        subgraphs = algorithm(graph)
 
     for i, subgraph in enumerate(subgraphs, 1):
         for node in subgraph.nodes.keys():
@@ -98,7 +103,7 @@ def _make_ig_nodes(
                     'y': nodes_positions[node_name][1] if nodes_positions
                          else random.randint(30, 600)
                 },
-                size=nodes_sizes[node_name] if nodes_sizes else 40
+                size=nodes_sizes[node_name] if nodes_sizes else 20
             )
         )
     return result
@@ -129,7 +134,8 @@ def graph_to_interactive_graph(
     nodes_label_align: str,
     nodes_positions: dict[Node, (float, float)],
     nodes_colors: dict[Node, str],
-    nodes_sizes: dict[Node, int]
+    nodes_sizes: dict[Node, int],
+    show_nodes_without_groups: bool
 ) -> InteractiveGraph:
     """TODO"""
     groups = _make_groups(graph, algorithm=groups_compile_algorithm)
@@ -140,7 +146,8 @@ def graph_to_interactive_graph(
             layout=_get_graph_layout(graph),
             groups=groups_info,
             nodes_label=nodes_label,
-            nodes_label_align=nodes_label_align
+            nodes_label_align=nodes_label_align,
+            show_nodes_without_groups=show_nodes_without_groups
         ),
         _make_ig_nodes(
             graph=graph,
@@ -161,10 +168,14 @@ def interactive_graph_to_json(graph: InteractiveGraph) -> str:
     return json.dumps(graph.to_dict())
 
 
-def jsoned_graph_to_html(graph: str, window_height: int):
+def jsoned_graph_to_html(
+    graph: str,
+    window_height: int
+) -> str:
     """TODO"""
-    frontend_folder = r'/Users/ekertn7/Desktop/Projects/ConnectionZ/' \
-                      r'connectionz/draw_interactive/frontend'
+    frontend_folder = os.path.join(
+        sys.path[1], 'connectionz', 'draw_interactive', 'frontend'
+    )
     with open(
         os.path.join(frontend_folder, 'index.html'), 'r', encoding='utf-8'
     ) as template:
@@ -173,4 +184,8 @@ def jsoned_graph_to_html(graph: str, window_height: int):
         os.path.join(frontend_folder, 'js', 'code.js'), 'r', encoding='utf-8'
     ) as script_file:
         code = script_file.read()
-    return html_template.format(graph_data=graph, code=code, window_height=window_height)
+    return html_template.format(
+        graph_data=graph,
+        code=code,
+        window_height=window_height
+    )
